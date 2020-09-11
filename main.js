@@ -3,40 +3,54 @@ window.$ = window.jQuery = require('jquery');
 
 //SystemInformation
 const si = require('systeminformation');
- 
-// promises style - new since version 3
-/*
-si.mem()
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
 
-si.cpuTemperature()
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+//ChartJS
+const Chart = require('chart.js');
 
-si.currentLoad()
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+var cpuUsage = [0,10,20,30,40,50,60,70];
 
-si.graphics()
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-
-si.networkStats()
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-  */
+var ctx = document.getElementById("cpubarid").getContext("2d");
+var BarCpu = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["1","2","3","4","5","6","7","8"],
+        datasets: [{
+            label: "cpu #0",
+            barPercentage: 0.5,
+            barThickness: 6,
+            minBarLength: 7,
+            data: cpuUsage
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMax: 100,
+                    suggestedMin: 0
+                }
+            }]
+        },
+        animation: {
+            duration: 0
+        }
+    }
+});
 
 function updateData() {
     si.currentLoad().then(data => {
+        cpuUsage = [];
         $(".text").html("");
-        //console.log(data);
         jQuery.each(data["cpus"], function() {
-            //console.log(this);
-            $(".text").append(this["load"] + "<br>");
+            //$(".text").append(this["load"] + "<br>");
+            cpuUsage.push(this["load"]);
         });
 
-        
+        //console.log(cpuUsage);
+        BarCpu.data.datasets[0] = {
+            data: cpuUsage
+        };
+        BarCpu.update();
     });
 }
 

@@ -21,6 +21,7 @@
     "electron": "^10.1.1"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "jquery": "^3.5.1",
     "systeminformation": "^4.27.3"
   }
