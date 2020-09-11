@@ -1,0 +1,23 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "Task manager by using electron js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samoth69/TaskManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samoth69/TaskManager/issues"
+  },
+  "homepage": "https://github.com/Samoth69/TaskManager#readme",
+  "devDependencies": {
+    "electron": "^10.1.1"
+  }
+}
